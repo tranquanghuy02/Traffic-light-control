@@ -10,22 +10,19 @@ const int greenPin = 7;
 const int yellowPin = 6;
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);
-
 void setup() {
-	Serial.begin(9600);		
-	while (!Serial);		
+Serial.begin(9600);		
+while (!Serial);		
 	SPI.begin();			
 	mfrc522.PCD_Init();		
-  pinMode(redPin, OUTPUT);
-  pinMode(yellowPin, OUTPUT);
-  pinMode(greenPin, OUTPUT);
+	pinMode(redPin, OUTPUT);
+	pinMode(yellowPin, OUTPUT);
+	pinMode(greenPin, OUTPUT);
 	mfrc522.PCD_DumpVersionToSerial();
 	Serial.println(F("Scan now..."));
 }
 
 void loop() {
-
-  
 	// Red light
         digitalWrite(redPin, HIGH);
         digitalWrite(yellowPin, LOW);
@@ -49,22 +46,19 @@ void loop() {
         Serial.println(sensorValue);
       
       if (sensorValue > 35) {
-
-		    if (  mfrc522.PICC_ReadCardSerial()) {
-          
-          mfrc522.PICC_DumpToSerial(&(mfrc522.uid));
-          digitalWrite(redPin, HIGH); // Red light on
-          delay(4000); // Hold red for 2 seconds
-          digitalWrite(redPin, LOW); // Red light off
-          digitalWrite(yellowPin, HIGH); // Yellow light on
-          delay(2500); // Hold yellow for 1 second
-          digitalWrite(yellowPin, LOW); // Yellow light off
-          digitalWrite(greenPin, HIGH); // Green light on
-          delay(8000); // Hold green for 3 seconds
-          digitalWrite(greenPin, LOW); // Green light of
-          return;
-          delay(1000);
-          }
-}
-        
+	      if (  mfrc522.PICC_ReadCardSerial()) {
+          	mfrc522.PICC_DumpToSerial(&(mfrc522.uid));
+          	digitalWrite(redPin, HIGH); // Red light on
+          	delay(4000); // Hold red for 2 seconds
+        	digitalWrite(redPin, LOW); // Red light off
+          	digitalWrite(yellowPin, HIGH); // Yellow light on
+          	delay(2500); // Hold yellow for 1 second
+          	digitalWrite(yellowPin, LOW); // Yellow light off
+          	digitalWrite(greenPin, HIGH); // Green light on
+          	delay(8000); // Hold green for 3 seconds
+          	digitalWrite(greenPin, LOW); // Green light of
+          	return;
+          	delay(1000);
+          	}
+      }  
 }
